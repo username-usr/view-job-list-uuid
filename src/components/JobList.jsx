@@ -1,32 +1,8 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
 
-function JobList() {
-  const { uid } = useParams(); // Get UID from URL
-  const [jobs, setJobs] = useState([]);
+function JobList({ jobs }) {
   const [selectedJobs, setSelectedJobs] = useState(new Set());
   const [error, setError] = useState(null);
-  // const API_URL = import.meta.env.VITE_API_URL;
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/api/jobs/${uid}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch jobs");
-        return res.json();
-      })
-      .then((data) => {
-        if (!Array.isArray(data)) throw new Error("Invalid job data");
-        const jobsWithIds = data.map((job, index) => ({
-          ...job,
-          id: job.id || index + 1,
-        }));
-        setJobs(jobsWithIds);
-      })
-      .catch((err) => {
-        console.error("Fetch error:", err);
-        setError("Failed to load jobs. Please try again.");
-      });
-  }, [uid]); // Refetch when UID changes
 
   const toggleJobSelection = (jobId) => {
     setSelectedJobs((prev) => {
@@ -45,7 +21,10 @@ function JobList() {
     })
       .then((res) => res.json())
       .then((data) => alert(data.message))
-      .catch((err) => console.error("Apply error:", err));
+      .catch((err) => {
+        console.error("Apply error:", err);
+        setError("Failed to apply for jobs. Please try again.");
+      });
   };
 
   return (
