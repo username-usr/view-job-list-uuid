@@ -5,7 +5,7 @@ function App() {
   return (
     <Router>
       <Routes>
-      <Route path="/:uid" element={<JobListPage />} />
+      <Route path="/jobs" element={<JobListPage />} />
 
       </Routes>
     </Router>
