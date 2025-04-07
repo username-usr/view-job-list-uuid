@@ -1,7 +1,8 @@
 // pages/JobListPage.jsx
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import JobList from '../JobList';
+import JobList from '../components/JobList';
+
 
 const JobListPage = () => {
   const [searchParams] = useSearchParams();
