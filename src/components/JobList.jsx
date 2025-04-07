@@ -6,6 +6,7 @@ function JobList() {
   const [jobs, setJobs] = useState([]);
   const [selectedJobs, setSelectedJobs] = useState(new Set());
   const [error, setError] = useState(null);
+  // const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/jobs/${uid}`)
@@ -37,7 +38,7 @@ function JobList() {
 
   const applyForJobs = () => {
     const selectedJobsArray = jobs.filter((job) => selectedJobs.has(job.id));
-    fetch("http://localhost:5000/api/apply", {
+    fetch("/api/apply", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(selectedJobsArray),
