@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-function JobList({}) {
+function JobList() {
+  const { uid } = useParams(); // Get UID from URL
   const [jobs, setJobs] = useState([]);
   const [selectedJobs, setSelectedJobs] = useState(new Set());
   const [error, setError] = useState(null);
+  // const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch(`https://see-your-scrapped-data.vercel.app
-/api/jobs/${uid}`)
+    fetch(`http://localhost:5000/api/jobs/${uid}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch jobs");
         return res.json();
